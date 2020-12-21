@@ -5,5 +5,5 @@ const {
     router
 } = createApp()
 router.onReady(() => {
-    app.$mount("#app")
+    app.$mount('#app')
 })

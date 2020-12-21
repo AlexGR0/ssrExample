@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Index from '@components/Index'
-import Detail from '@components/Detail'
+import Index from '@/components/index'
+import Detail from '@/components/detail'
 
 Vue.use(VueRouter)
 
@@ -23,7 +23,7 @@ const routes = [{
 
 export default function createRouter() {
   return new VueRouter({
-    mode: history,
+    mode: 'history',
     routes
   })
 }

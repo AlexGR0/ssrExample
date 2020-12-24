@@ -28,7 +28,11 @@ app.get("*", async (req, res) => {
         res.send(html)
     } catch (err) {
         console.log(err)
-        res.status(500).send("error")
+        if (err.code === 404) {
+            res.status(404).end('Page not found')
+        } else {
+            res.status(500).end('Internal Server Error')
+        }
     }
 })
 

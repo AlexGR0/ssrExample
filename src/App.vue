@@ -5,13 +5,23 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/> -->
-    <nav>
+    <!-- <nav>
       <router-link to="/">首页</router-link>
       <router-link to="/detail">详情页</router-link>
     </nav>
-    <router-view></router-view>
+    <router-view></router-view> -->
+    <FormTest></FormTest>
   </div>
 </template>
+
+<script>
+    import FormTest from './components/form/index'
+    export default {
+        components:{
+          FormTest
+        }
+    }
+</script>
 
 <style lang="scss">
 #app {

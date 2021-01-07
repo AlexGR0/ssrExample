@@ -24,7 +24,7 @@ class VueRouter {
     }
     onHashChange() {
         //   http://localhost:3000/#/home
-        this.app.current = window.location.hash.slice(1) || "/"
+        this.app.current = window.location.hash.slice(1) || ""
     }
     createRouterMap(options) {
         options.routes.forEach(item => {

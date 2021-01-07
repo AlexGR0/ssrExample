@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
+import VueRouter from './Grouter'
 
 import Index from '@/components/Index'
 import Detail from '@/components/Detail'
@@ -21,9 +21,7 @@ const routes = [{
   }
 ]
 
-export default function createRouter() {
-  return new VueRouter({
-    mode: 'history',
-    routes
-  })
-}
+export default new VueRouter({
+  mode: 'history',
+  routes
+})

@@ -11,11 +11,11 @@ class VueRouter {
         })
     }
     init() {
-        // 绑定浏览器事件
+        //   绑定浏览器事件
         this.bindEvents()
-        //解析路由配置
+        //   解析路由配置
         this.createRouterMap(this.$options)
-        //创建router-link和router-view
+        //   创建router-link和router-view
         this.initComponent()
     }
     bindEvents() {
@@ -23,10 +23,8 @@ class VueRouter {
         window.addEventListener("load", this.onHashChange.bind(this))
     }
     onHashChange() {
-        //    http://localhost:3000/#/home
+        //   http://localhost:3000/#/home
         this.app.current = window.location.hash.slice(1) || "/"
-
-
     }
     createRouterMap(options) {
         options.routes.forEach(item => {
@@ -45,6 +43,7 @@ class VueRouter {
 
         //  hash->current->render
         Vue.component("router-view", {
+            //箭头函数解决this指向
             render: (h) => {
                 const Comp = this.routeMap[this.app.current].component
                 return h(Comp)

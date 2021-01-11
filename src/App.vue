@@ -5,13 +5,23 @@
       <router-link to="/about">About</router-link>
     </div>
     <router-view/> -->
-    <nav>
-      <router-link to="/">首页</router-link>
+    <!-- <nav>
+      <router-link to="/">首页</router-link> | 
       <router-link to="/detail">详情页</router-link>
     </nav>
-    <router-view></router-view>
+    <router-view></router-view> -->
+    <GVuexTest></GVuexTest>
   </div>
 </template>
+
+<script>
+import GVuexTest from './components/GVuex'
+export default {
+  components:{
+    GVuexTest
+  }
+}
+</script>
 
 <style lang="scss">
 #app {

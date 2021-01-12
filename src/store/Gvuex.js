@@ -20,7 +20,7 @@ class Store {
             state: this.state
         }, arg)
     }
-    //{getters:{score(state){return state.xx}}}
+    //{getters:{score:score(state){return state.xx}}}
     handleGetters(getters) {
         this.getters = {}  //store实例上的getters
         //定义只读属性

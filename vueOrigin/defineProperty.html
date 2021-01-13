@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Object.defineProperty</title>
+</head>
+<body>
+    <div>
+        <p>hello <span id="name"></span> </p>
+    </div>
+    <script>
+        var obj = {}
+        Object.defineProperty(obj,"name",{
+            get:()=>{
+                console.log("get name")
+                return document.getElementById("name").innerHTML
+            },
+            set:(nick)=>{
+                console.log("set name")
+                return document.getElementById("name").innerHTML=nick
+            }
+        })
+        obj.name="jerry"
+        console.log(obj.name)
+    </script>
+</body>
+</html>

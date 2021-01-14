@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="./GVue.js"></script>
+    <!-- <script src="./GVue.js"></script>
     <script>
         const app = new GVue({
             data:{foo:"foo",bar:{mua:"mua"}}
@@ -15,6 +15,38 @@
         app.bar.mua="aaa";
 
         console.log(app.$data)
+    </script> -->
+    <div id="app">
+        <p>{{name}}</p>
+        <p g-text="name"></p>
+        <p>{{age}}</p>
+        <input type="text" g-model="name">
+        <button @click="changeName">click</button>
+        <div g-html="html"></div>
+    </div>
+    <script src="./compile.js"></script>
+    <script src="./GVue.js"></script>
+    <script>
+        const g = new GVue({
+            el:"#app",
+            data:{
+                name:"i'm test.",
+                age:12,
+                html:'<button>button</button>'
+            },
+            created() {
+                console.log("start")
+                setTimeout(()=>{
+                    this.name='gg'
+                },1500)
+            },
+            methods: {
+                changeName(){
+                    this.name="ggg",
+                    this.age=1
+                }
+            },
+        })
     </script>
 </body>
 </html>

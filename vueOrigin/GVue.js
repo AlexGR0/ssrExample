@@ -1,8 +1,18 @@
 class GVue {
     constructor(options) {
         this.$options = options
+        //传入data
         this.$data = options.data
+        //响应化处理
         this.observe(this.$data)
+
+        // new Watcher(this,"bar.mua")
+        // this.bar.mua
+
+        new Compile(options.el, this)
+        if (options.created) {
+            options.created.call(this)
+        }
     }
     observe(value) {
         if (!value || typeof value !== "object") {
@@ -46,25 +56,36 @@ class GVue {
 
 class Dep {
     constructor() {
-        this.watchers =[]
+        this.watchers = []
     }
-    addDep(watcher){
+    addDep(watcher) {
         this.watchers.push(watcher)
     }
-    notify(){
-        this.watchers.forEach(dep=>{
+    notify() {
+        this.watchers.forEach(dep => {
             dep.update()
         })
     }
 }
 
-class Watcher{
-    constructor(vm,key){
+//创建Watcher：保存data中数值和页面中的挂钩关系
+class Watcher {
+    constructor(vm, key, cb) {
+        //创建实例时立刻将该实例指向Dep.target便于依赖收集
         Dep.target = this
         this.vm = vm
         this.key = key
+        this.cb = cb
+
+        //触发依赖收集
+        Dep.target = this
+        this.vm[this.key] //触发依赖收集
+        Dep.target = null
     }
-    update(){
-        console.log(this.key+" key update")
+
+    //更新
+    update() {
+        this.cb.call(this.vm,this.vm[this.key])
+        console.log(this.key + " key update")
     }
 }

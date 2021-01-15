@@ -24,12 +24,16 @@ class GVue {
         })
     }
     defineReactive(obj, key, val) {
+        //递归遍历
         this.observe(val)
 
-        const dep = new Dep()
+        //定义一个Dep
+        const dep = new Dep()//每个dep实例和data中每个key有一对一关系
 
+        //给obj的每一个key定义拦截
         Object.defineProperty(obj, key, {
             get() {
+                //依赖收集
                 Dep.target && dep.addDep(Dep.target)
                 return val
             },

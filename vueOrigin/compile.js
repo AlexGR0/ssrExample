@@ -57,9 +57,6 @@ class Compile {
             updator && updator(node, value)
         })
     }
-    textUpdator(node, value) {
-        node.textContent = value
-    }
     //元素替换
     compileElement(node) {
         //关心属性
@@ -72,11 +69,46 @@ class Compile {
                 //指令
                 const dir = attrName.substring(2) //xxx
                 //执行
-                this[dir] && this[dir](node, exp)
+                this[dir] && this[dir](node, exp, this.$vm, dir)
+            }
+            //事件处理
+            if (attrName.indexOf("@") == 0) {
+                const eventName = attrName.substring(1)
+                this.eventHandler(node, exp, this.$vm, eventName)
             }
         })
     }
+    //g-text
     text(node, exp) {
         this.update(node, exp, "text")
+    }
+    textUpdator(node, value) {
+        node.textContent = value
+    }
+    //g-html
+    html(node, exp) {
+        this.update(node, exp, "html")
+    }
+    htmlUpdator(node, value) {
+        node.innerHTML = value
+    }
+    //g-model
+    model(node, exp, vm) {
+        this.update(node, exp, "model")
+        node.addEventListener("input", e => {
+            vm[exp] = e.target.value
+        })
+    }
+    modelUpdator(node, value) {
+        node.value = value
+    }
+
+    //事件处理：给node添加事件监听，@事件名称
+    //通过vm.$options.methods[exp]可获取回调函数
+    eventHandler(node, exp, vm, eventName){
+        let fn = vm.$options.methods&&vm.$options.methods[exp]
+        if(eventName&&fn){
+            node.addEventListener(eventName,fn.bind(vm))
+        }
     }
 }

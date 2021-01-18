@@ -6,12 +6,27 @@
     </div>
     <router-view/> -->
     <nav>
-      <router-link to="/">首页</router-link>
+      <router-link to="/">首页</router-link> | 
       <router-link to="/detail">详情页</router-link>
     </nav>
     <router-view></router-view>
+    <!-- <svg class="icon">
+      <use xlink:href="#icon-wx"></use>
+    </svg>
+    <svg class="icon">
+      <use xlink:href="#icon-qq"></use>
+    </svg> -->
+    <SvgIcon iconClass="qq" className="qqIcon"></SvgIcon>
+    <SvgIcon iconClass="wx"></SvgIcon>
   </div>
 </template>
+
+<script>
+// import SvgIcon from './components/SvgIcon.vue'
+// import './icons/svg/wx.svg'
+export default {
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -33,5 +48,9 @@
       color: #42b983;
     }
   }
+}
+.qqIcon{
+  font-size: 12px;
+  color: aqua;
 }
 </style>

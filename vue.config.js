@@ -1,36 +1,30 @@
-const VueSSRServerPlugin = require("vue-server-renderer/server-plugin")
-const VueSSRClientPlugin = require("vue-server-renderer/client-plugin")
-const nodeExternals = require("webpack-node-externals")
-const merge = require("lodash.merge")
-const TARGET_NODE = process.env.WEBPACK_TARGET === "node"
-const target = TARGET_NODE ? "server" : "client"
+const port = 7070
+const title = "vue实践"
+const path = require("path")
+function reslove(dir){
+    return path.join(__dirname,dir)
+}
 
 module.exports = {
-    css: {
-        extract: false
+    publicPath:'/best-practice',
+    devServer: {
+        port
     },
-    outputDir: './dist/' + target,
-    configureWebpack: () => ({
-        entry: `./src/entry-${target}.js`,
-        devtool: 'source-map',
-        target: TARGET_NODE ? "node" : "web",
-        node: TARGET_NODE ? undefined : false,
-        output: {
-            libraryTarget: TARGET_NODE ? "commonjs2" : undefined
-        },
-        externals: TARGET_NODE ? nodeExternals({
-            allowlist: [/\.css$/]
-        }) : undefined,
-        optimization: {
-            splitChunks: TARGET_NODE ? false : undefined
-        },
-        plugins: [TARGET_NODE ? new VueSSRServerPlugin() : new VueSSRClientPlugin()]
-    }),
-    chainWebpack: config => {
-        config.module.rule("vue").use("vue-loader").tap(options => {
-            merge(options, {
-                optimizeSSR: false
-            });
-        });
+    configureWebpack: {
+        name: title
+    },
+    chainWebpack(config){
+        config.module.rule('svg')
+            .exclude.add(reslove("/src/icons"))
+        
+        config.module.rule('icons')
+            .test(/\.svg$/)                               //设置test
+            .include.add(reslove("/src/icons"))           //加入include
+                .end()                                    //add完上下文进入了数组即之前的include，使用end回退
+            .use("svg-sprite-loader")                     //添加loader
+                .loader("svg-sprite-loader")              //切换上下文到loader
+                .options({symbolId:"icon-[name]"})
+                .end()
+
     }
 }

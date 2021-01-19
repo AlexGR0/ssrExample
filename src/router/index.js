@@ -3,10 +3,18 @@ import VueRouter from 'vue-router'
 
 import Index from '@/components/Index'
 import Detail from '@/components/Detail'
+import About from '@/components/About'
+import Login from '@/components/Login'
 
 Vue.use(VueRouter)
 
-const routes = [{
+export const constRoutes = [
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
     path: '/',
     name: 'Index',
     component: Index
@@ -20,8 +28,16 @@ const routes = [{
     component: Detail
   }
 ]
+export const asyncRoutes = [{
+  path: '/about',
+  name: 'Detail',
+  component: About,
+  meta: {
+    roles: ["admin", "editor"]
+  }
+}]
 
 export default new VueRouter({
   mode: 'history',
-  routes
+  routes: constRoutes
 })

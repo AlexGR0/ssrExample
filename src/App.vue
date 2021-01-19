@@ -7,7 +7,8 @@
     <router-view/> -->
     <nav>
       <router-link to="/">首页</router-link> | 
-      <router-link to="/detail">详情页</router-link>
+      <router-link to="/detail">详情页</router-link> |
+      <router-link to="/about">about</router-link>
     </nav>
     <router-view></router-view>
     <!-- <svg class="icon">
@@ -16,8 +17,6 @@
     <svg class="icon">
       <use xlink:href="#icon-qq"></use>
     </svg> -->
-    <SvgIcon iconClass="qq" className="qqIcon"></SvgIcon>
-    <SvgIcon iconClass="wx"></SvgIcon>
   </div>
 </template>
 

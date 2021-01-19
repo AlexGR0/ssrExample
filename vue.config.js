@@ -6,7 +6,7 @@ function reslove(dir){
 }
 
 module.exports = {
-    publicPath:'/best-practice',
+    // publicPath:'/best-practice',
     devServer: {
         port
     },

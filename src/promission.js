@@ -23,7 +23,7 @@ router.beforeEach(async(to, from, next) => {
                 const acRoutes = await store.dispatch('promission/generateRoutes', roles)
                 //添加至router
                 router.addRoutes(acRoutes)
-                //重定向
+                //重定向 replace是vue告诉浏览器不难通过回退返回上一个路由
                 next({...to,replace: true})
             }
         }

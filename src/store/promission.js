@@ -13,7 +13,7 @@ function hasPromisstion(roles, route) {
 }
 
 //递归过滤AsyncRoutes路由表
-export function filterAsyncRoutes(routes, roles) {
+function filterAsyncRoutes(routes, roles) {
     const res = []
     routes.forEach(route => {
         //复制一份

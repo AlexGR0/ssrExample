@@ -4,6 +4,9 @@ import router from './router'
 import store from './store'
 import './icons/index'
 import './promission'
+import promission from './directive/promission'
+
+Vue.directive("promission",promission)
 
 Vue.config.productionTip = false
 
